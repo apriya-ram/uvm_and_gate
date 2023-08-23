@@ -1,0 +1,13 @@
+VCS_CMD_RAND    = vcs -V -R  -full64 -sverilog +v2k -gui -debug_access+all -ntb_opts -debug_pp +ntb_random_seed_automatic -override_timescale=1ps/1ps
+
+DESIGN_FILES    = *.v 
+#please change the path of UVM_FILES as per the uvm library and i
+#which ever version of uvm present in your library path 
+UVM_FILES = +incdir+/projects/ADAD/FE/UVM/uvm-1.2/src /projects/ADAD/FE/UVM/uvm-1.2/src/uvm_pkg.sv +define+UVM_NO_DPI
+
+TESTBENCH_FILES = and2_if.sv my_agent_pkg.sv top.sv
+
+sim:
+	${VCS_CMD_RAND} ${DESIGN_FILES} ${UVM_FILES} ${TESTBENCH_FILES} +UVM_VERBOSITY=HIGH  
+
+
